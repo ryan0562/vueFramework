@@ -3,10 +3,15 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
+//全局重定义样式
 import 'src/common/reset.scss'
-
+//mintUi框架
+import Mint from 'mint-ui';
+import 'mint-ui/lib/style.css'
 
 Vue.config.productionTip = false;
+
+Vue.use(Mint);
 
 /* eslint-disable no-new */
 new Vue({
