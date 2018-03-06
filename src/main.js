@@ -3,6 +3,8 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
+//px转rem
+import 'lib-flexible/flexible.js'
 //全局重定义样式
 import 'src/common/reset.scss'
 //mintUi框架

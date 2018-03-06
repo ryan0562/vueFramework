@@ -9,7 +9,8 @@ html {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-size: calc(100vw / 3.75); //3.75为375/100，375为iPhone6,7,8的可视宽度
+  font-size: 12px;
+  //font-size: calc(100vw / 3.75); //3.75为375/100，375为iPhone6,7,8的可视宽度
 }
 
 ul, menu, dir {
