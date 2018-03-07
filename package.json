@@ -11,7 +11,6 @@
   },
   "dependencies": {
     "px2rem-loader": "^0.1.7",
-    "lib-flexible": "^0.3.2",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"
   },
