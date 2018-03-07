@@ -1,5 +1,5 @@
 <template>
-  <div class="test">
+  <div class="fineBorder">
 
   </div>
 </template>
@@ -15,7 +15,17 @@
     }
 </script>
 <style lang="scss">
-.test {
-  border: 0.5px solid #000; /*no*/
+.fineBorder {
+  position: relative;
+  height: 300px;
+  &:before{
+    content: " ";
+    width: 100%;
+    height: 1px; /*no*/
+    background: #ccc;
+    position: absolute;
+    bottom:0;
+    transform: scaleY(.5);
+  }
 }
 </style>
