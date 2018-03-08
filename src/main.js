@@ -12,6 +12,12 @@ import 'src/common/common.scss'
 import Mint from 'mint-ui';
 import 'mint-ui/lib/style.css'
 
+
+//引入mockjs//模拟API返回数据
+import mock from 'mockjs'
+
+
+
 Vue.config.productionTip = false;
 
 Vue.use(Mint);
