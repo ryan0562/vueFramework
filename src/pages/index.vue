@@ -1,6 +1,5 @@
 <template>
-  <div class="fineBorder">
-
+  <div class="border-right">
   </div>
 </template>
 <script>
@@ -15,17 +14,7 @@
     }
 </script>
 <style lang="scss">
-.fineBorder {
+.border-right {
   position: relative;
-  height: 300px;
-  &:before{
-    content: " ";
-    width: 100%;
-    height: 1px; /*no*/
-    background: #ccc;
-    position: absolute;
-    bottom:0;
-    transform: scaleY(.5);
-  }
 }
 </style>

@@ -7,6 +7,7 @@ import router from './router'
 import 'src/common/flexible.js'
 //全局重定义样式
 import 'src/common/reset.scss'
+import 'src/common/common.scss'
 //mintUi框架
 import Mint from 'mint-ui';
 import 'mint-ui/lib/style.css'
