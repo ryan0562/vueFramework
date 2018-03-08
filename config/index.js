@@ -10,7 +10,13 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    proxyTable:{
+      "/api":{
+        // target:'http://192.168.3.191:8080'
+        // target:'http://192.168.3.50:8080'
+        target:'http://loan.niubangold.com'
+      }
+    },
 
     // Various Dev Server settings
     host: '0.0.0.0', // can be overwritten by process.env.HOST
