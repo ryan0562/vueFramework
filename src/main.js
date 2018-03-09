@@ -7,13 +7,18 @@ import qs from 'qs'
 //px转rem 源码修改过,不要用依赖库里的
 import 'src/common/flexible.js'
 //全局重定义样式
+import 'mint-ui/lib/style.css'
 import 'src/common/reset.scss'
 import 'src/common/common.scss'
 //mintUi框架
 import Mint from 'mint-ui';
-import 'mint-ui/lib/style.css'
+Vue.use(Mint);
+
 //axios
 import axios from 'axios'
+//请求/返回 拦截,以及mock
+// import mock from 'src/common/mock/mock'
+
 // 格式化数据
 axios.defaults.transformRequest.push(function (data, headers) {
   if (headers['Content-Type'] === 'application/json;charset=utf-8') {
@@ -22,14 +27,8 @@ axios.defaults.transformRequest.push(function (data, headers) {
   }
   return data;
 });
-//引入mockjs//模拟API返回数据
-// import mock from 'mockjs'
-
-
 
 Vue.config.productionTip = false;
-
-Vue.use(Mint);
 
 /* eslint-disable no-new */
 new Vue({

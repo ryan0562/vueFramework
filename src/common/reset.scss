@@ -5,6 +5,10 @@
   outline: 0;
 }
 
+abbr, article, aside, audio, canvas, datalist, details, dialog, figure, footer, header, hgroup, mark, menu, meter, nav, output, progress, section, time, video {
+  display: block;
+}
+
 html {
   font-family: "Helvetica Neue", Helvetica, STHeiTi, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -13,15 +17,16 @@ html {
   //font-size: calc(100vw / 3.75); //3.75为375/100，375为iPhone6,7,8的可视宽度
 }
 
-ul, menu, dir {
-  padding: 0;
-  list-style: none;
+textarea {
+  font-family: "Helvetica Neue", Helvetica, STHeiTi, Arial, sans-serif;
+  resize: none;
 }
 
-html, body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, p, td, strong {
+html, body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, p, td, strong, ul, menu, dir {
   padding: 0;
   margin: 0;
   font-weight: normal;
+  list-style: none;
 }
 
 table {
@@ -48,10 +53,6 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
-/*此处待添加默认链接颜色*/
-abbr, article, aside, audio, canvas, datalist, details, dialog, figure, footer, header, hgroup, mark, menu, meter, nav, output, progress, section, time, video {
-  display: block;
-}
 
 //清除浮动间隔
 .clearfix {
