@@ -1,4 +1,4 @@
-# vue-framework
+# vux-framework
 
 > A Vue.js project
 
@@ -8,7 +8,7 @@
 # install dependencies
 npm install
 
-# serve with hot reload at localhost:5801
+# serve with hot reload at localhost:8080
 npm run dev
 
 # build for production with minification
