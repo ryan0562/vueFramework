@@ -10,6 +10,8 @@ import 'src/common/flexible.js'
 import 'mint-ui/lib/style.css'
 import 'src/common/reset.scss'
 import 'src/common/common.scss'
+
+import 'static/Font-Awesome-3.2.1/css/font-awesome.min.css'
 //mintUi框架
 import Mint from 'mint-ui';
 Vue.use(Mint);
