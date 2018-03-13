@@ -19,7 +19,9 @@
 <style lang="scss">
   .page-demo {
     padding-bottom: 50px;
-
+    .mint-cell {
+      border-bottom: 1px solid #dfdfdf;
+    }
     .indexicon {
       font-size: 22px;
       color: #26a2ff;
