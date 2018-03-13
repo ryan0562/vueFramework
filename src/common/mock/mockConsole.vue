@@ -1,21 +1,27 @@
 <template>
-  <section class="mockBox" v-show="mockBoxShow">
+  <section class="mockBox" v-show="mockConsoleShow">
     <div class="mockBg" @click.stop="closeMock()"></div>
-    <div class="mockMain mockConsole" v-show="mockBoxShow && mockConsoleShow">
+    <div class="mockMain mockConsole">
       <mt-header title="mock控制台">
-        <label slot="left"><input type="checkbox" class="checkbox" v-model="allCheck">启用</label>
+        <label slot="left"><input type="checkbox" class="checkbox" v-model="mockList.checked"
+                                  @click="setAll(mockList.checked)">启用</label>
         <mt-button slot="right" @click.stop="openMockForm()">新建</mt-button>
       </mt-header>
       <div class="mockCon">
-        <mt-cell v-for="item in mockList" :key="item.$index" :title="item.title" :label="item.url" @click.native="mockEdit(item)">
+        <mt-cell v-for="item in mockList.main" :key="item.$index" :title="item.title" :label="item.url"
+                 @click.native="mockEdit(item)">
           <i class="icon-remove" @click.stop="mockDel(item.url)"></i>
           <input type="checkbox" slot="icon" class="checkbox" @click.stop="">
         </mt-cell>
       </div>
     </div>
-    <div class="mockMain mockForm" v-if="mockBoxShow && mockFormShow">
+    <div class="mockMain mockForm" v-if="mockFormShow">
       <mt-header title="mockList"></mt-header>
       <div class="mockCon">
+        <label class="mint-cell-wrapper">
+          <span class="labelTit">启用</span>
+          <input type="checkbox" class="checkbox" v-model="mockForm.checked">
+        </label>
         <mt-field label="标题" placeholder="请输入标题" v-model="mockForm.title"></mt-field>
         <mt-field label="API" placeholder="请输入接口地址" v-model="mockForm.url"></mt-field>
         <div class="mockTextarea">
@@ -33,76 +39,58 @@
   export default {
     data() {
       return {
-        mockBoxShow: false,
         mockConsoleShow: false,
         mockFormShow: false,
-        mockList: [],
-        mockForm: {},
-        allCheck: true,
+        mockList: {
+          checked: true,
+          main: {}
+        },
+        mockForm: {
+          checked: true,
+        },
       };
     },
     components: {},
-    watch: {
-      mockConsoleShow: function () {
-        if (this.mockBoxShow === false) {
-          return false
-        }
-      },
-      mockFormShow: function () {
-        if (this.mockBoxShow === false) {
-          return false
-        }
-      }
-    },
-
     created() {
-      this.getLocalStorage();
+      if (localStorage.getItem('mock')) {
+        this.getLocalStorage();
+      } else {
+        localStorage.setItem('mock', JSON.stringify(this.mockList));
+      }
     },
     methods: {
       //盒子
       openMock: function () {
-        this.mockBoxShow = true;
-        this.openMockConsole();
-        this.closeMockForm();
-      },
-      closeMock: function () {
-        this.mockBoxShow = false;
-      },
-      //控制台
-      openMockConsole: function () {
         this.mockConsoleShow = true;
       },
-      closeMockConsole: function () {
+      closeMock: function () {
         this.mockConsoleShow = false;
       },
       //表单
       openMockForm: function () {
         this.mockFormShow = true;
-        this.closeMockConsole();
+        this.resetMockForm();
       },
       closeMockForm: function () {
         this.mockFormShow = false;
-        this.mockForm = {};
-        this.openMockConsole();
+      },
+      resetMockForm: function () {
+        this.mockForm = {
+          checked: true,
+        };
       },
       addMock: function () {
-//        let mock = localStorage.getItem('mock') || '[]';
-//        mock = JSON.parse(mock);
-//        mock.push(this.mockForm);
-//        localStorage.setItem('mock', JSON.stringify(mock));
         if (!this.mockForm.url || !this.mockForm.title) {
           this.$toast('标题跟API必填');
           return
         }
-        let mock = localStorage.getItem('mock') || '{}';
-        let obj = {};
-        obj[this.mockForm.url] = this.mockForm;
+        let mock = localStorage.getItem('mock');
         mock = JSON.parse(mock);
-        mock = Object.assign({}, mock, obj);
+        mock.main[this.mockForm.url] = this.mockForm;
         localStorage.setItem('mock', JSON.stringify(mock));
         //获取缓存并返回列表
         this.getLocalStorage();
-        this.openMock();
+        this.closeMockForm();
       },
       mockEdit: function (form) {
         this.openMockForm();
@@ -112,14 +100,19 @@
         this.mockList = JSON.parse(localStorage.getItem('mock'));
       },
       mockDel: function (url) {
-        delete this.mockList[url];
+        delete this.mockList.main[url];
         localStorage.setItem('mock', JSON.stringify(this.mockList));
         this.$forceUpdate();
+      },
+      setAll: function (val) {
+        this.mockList.checked = !val;
+        localStorage.setItem('mock', JSON.stringify(this.mockList));
       },
     }
   }
 </script>
 <style lang="scss">
+
   .mockBox {
     position: fixed;
     top: 0;
@@ -127,6 +120,9 @@
     left: 0;
     right: 0;
     z-index: 99;
+    .labelTit {
+      width: 60px;
+    }
     .checkbox {
       width: 14px;
       height: 14px;
@@ -167,10 +163,15 @@
     background: #fff;
     border-radius: 10px;
     overflow: auto;
-    max-height: 80%;
+    height: 410px;
     width: 80%;
     position: absolute;
     left: 10%;
     top: 10%;
+  }
+
+  .mockConsole {
+    height: auto;
+    max-height: 410px;
   }
 </style>
