@@ -19,7 +19,21 @@ Vue.use(Mint);
 //axios
 import axios from 'axios'
 //请求/返回 拦截,以及mock
-// import mock from 'src/common/mock/mock'
+import 'src/common/mock/mock'
+
+//添加一个请求拦截器
+axios.interceptors.request.use(function (config) {
+  return config;
+}, function (error) {
+  return Promise.reject(error);
+});
+//添加一个返回拦截器
+axios.interceptors.response.use(function (response) {
+  return response;
+}, function (error) {
+  return Promise.reject(error);
+});
+
 
 // 格式化数据
 axios.defaults.transformRequest.push(function (data, headers) {

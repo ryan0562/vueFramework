@@ -1,24 +1,24 @@
-import axios from 'axios';
 import Mock from 'mockjs';
 
 let mockObj;
-//添加一个请求拦截器
-axios.interceptors.request.use(function (config) {
-  return config;
-}, function (error) {
-  return Promise.reject(error);
-});
-//添加一个返回拦截器
-axios.interceptors.response.use(function (response) {
-  return response;
-}, function (error) {
-  return Promise.reject(error);
-});
-mockObj = Mock.mock('/api/loan/person/mobile/detect', {
-  'name': '@name',
-  'age|1-100': 100,
-  'color': '@color'
-});
+let mockUse = function () {
+  if (!mockData.checked) {
+    return false
+  }
+
+  for (let name in mockData.main) {
+    let obj = mockData.main[name];
+    if (!obj.checked) {
+      break;
+    }
+    let template = obj.template.trim();
+    Mock.mock(name, eval(`(${template})`));//JS解析()会把里面当成JS表达式运算得到的结果就是字符串本身的代码含义
+    console.info(`Mocked:`, name);
+  }
+};
+let mockData = JSON.parse(localStorage.getItem('mock'));
+mockUse();
+
 export default mockObj;
 
 

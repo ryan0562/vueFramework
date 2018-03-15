@@ -10,12 +10,12 @@
           };
         },
         created: function () {
-          this.$axios.post('/api/loan/person/mobile/detect', {mobile: 15397191444})
-            .then(() => {
-              console.log('成功')
+          this.$axios.post('/a', {mobile: 15397191444})
+            .then(res => {
+              console.log('成功',res)
             })
-            .catch(() => {
-              console.log('失败')
+            .catch(res => {
+              console.log('失败',res)
             })
         },
         components: {},
