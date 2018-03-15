@@ -1,5 +1,5 @@
 <template>
-  <section class="mockBox" v-show="mockConsoleShow">
+  <section class="mockBox" v-if="mockConsoleShow">
     <div class="mockBg" @click.stop="closeMock()"></div>
     <div class="mockMain mockConsole">
       <mt-header title="mock控制台">

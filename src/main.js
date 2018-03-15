@@ -18,8 +18,9 @@ Vue.use(Mint);
 
 //axios
 import axios from 'axios'
-//请求/返回 拦截,以及mock
-import 'src/common/mock/mock'
+//请求拦截器并返回模拟数据
+// import 'src/common/mock/mock'
+
 
 //添加一个请求拦截器
 axios.interceptors.request.use(function (config) {

@@ -1,24 +1,24 @@
 import Mock from 'mockjs';
 
-let mockObj;
-let mockUse = function () {
-  if (!mockData.checked) {
-    return false
-  }
-
-  for (let name in mockData.main) {
-    let obj = mockData.main[name];
-    if (!obj.checked) {
-      break;
+if (process.env.NODE_ENV !== 'production') {
+  let mockData = JSON.parse(localStorage.getItem('mock'));
+  let mockUse = function () {
+    if (!mockData.checked) {
+      return false
     }
-    let template = obj.template.trim();
-    Mock.mock(name, eval(`(${template})`));//JS解析()会把里面当成JS表达式运算得到的结果就是字符串本身的代码含义
-    console.info(`Mocked:`, name);
-  }
-};
-let mockData = JSON.parse(localStorage.getItem('mock'));
-mockUse();
+    for (let name in mockData.main) {
+      let obj = mockData.main[name];
+      if (!obj.checked) {
+        break;
+      }
+      let template = obj.template.trim();
+      Mock.mock(name, eval(`(${template})`));//JS解析()会把里面当成JS表达式运算得到的结果就是字符串本身的代码含义
+      console.info(`Mocked:`, name);
+    }
+  };
+  mockUse();
+}
 
-export default mockObj;
+
 
 
