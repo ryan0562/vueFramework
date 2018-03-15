@@ -12,7 +12,11 @@ if (process.env.NODE_ENV !== 'production') {
         break;
       }
       let template = obj.template.trim();
-      Mock.mock(name, eval(`(${template})`));//JS解析()会把里面当成JS表达式运算得到的结果就是字符串本身的代码含义
+      try {
+        Mock.mock(name, eval(`(${template})`));//JS解析()会把里面当成JS表达式运算得到的结果就是字符串本身的代码含义
+      } catch (err) {
+        console.error('mock数据错误:' + err);
+      }
       console.info(`Mocked:`, name);
     }
   };
