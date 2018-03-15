@@ -4,14 +4,15 @@
     <div class="mockMain mockConsole">
       <mt-header title="mock控制台">
         <label slot="left"><input type="checkbox" class="checkbox" v-model="mockList.checked"
-                                  @click="setAll(mockList.checked)">启用</label>
+                                  @change="setLocalStorage()">启用</label>
         <mt-button slot="right" @click.stop="openMockForm()">新建</mt-button>
       </mt-header>
       <div class="mockCon">
         <mt-cell v-for="item in mockList.main" :key="item.$index" :title="item.title" :label="item.url"
                  @click.native="mockEdit(item)">
           <i class="icon-remove" @click.stop="mockDel(item.url)"></i>
-          <input type="checkbox" slot="icon" class="checkbox" @click.stop="">
+          <input type="checkbox" slot="icon" class="checkbox" @click.stop="" v-model="item.checked"
+                 @change="setLocalStorage()">
         </mt-cell>
       </div>
     </div>
@@ -104,8 +105,7 @@
         localStorage.setItem('mock', JSON.stringify(this.mockList));
         this.$forceUpdate();
       },
-      setAll: function (val) {
-        this.mockList.checked = !val;
+      setLocalStorage: function () {
         localStorage.setItem('mock', JSON.stringify(this.mockList));
       },
     }
